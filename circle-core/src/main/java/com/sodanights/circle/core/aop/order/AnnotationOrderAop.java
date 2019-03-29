@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AnnotationOrderAop {
 
-    @Around(value = "execution(* com.sodanights.circle.core.user.*.*(..))")
+    @Around(value = "execution(* com.sodanights.circle.core.user..*.*(..))")
     public Object around(ProceedingJoinPoint joinPoint){
         System.out.println("A");
         try {
@@ -21,7 +21,7 @@ public class AnnotationOrderAop {
             System.out.println("B");
             return obj;
         } catch (Throwable throwable) {
-            throwable.printStackTrace();
+            System.out.println("XXXXX");
         }
         return null;
 
