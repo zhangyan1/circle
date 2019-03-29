@@ -3,8 +3,7 @@ package com.sodanights.circle.core.aop.order;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.*;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +23,21 @@ public class AnnotationOrderAop {
             System.out.println("XXXXX");
         }
         return null;
+    }
 
+    @Before(value = "within(com.sodanights.circle.core.user..*)")
+    public void before(){
+        System.out.println("C");
+    }
+
+    @After(value = "target(com.sodanights.circle.core.user.service.UserInfoService)")
+    public void after(){
+        System.out.println("D");
+    }
+
+    @AfterReturning(value = "target(com.sodanights.circle.core.user.service.UserInfoService)")
+    public void beforeReturn(){
+        System.out.println("E");
     }
 
 }
