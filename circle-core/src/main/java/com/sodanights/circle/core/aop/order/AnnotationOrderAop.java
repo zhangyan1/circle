@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 @Aspect
 @Order(1)
-@Service
 public class AnnotationOrderAop {
 
     @Around(value = "execution(* com.sodanights.circle.core.user..*.*(..))")

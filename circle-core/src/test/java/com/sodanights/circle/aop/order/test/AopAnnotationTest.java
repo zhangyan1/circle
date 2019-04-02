@@ -2,6 +2,7 @@ package com.sodanights.circle.aop.order.test;
 
 
 import com.sodanights.circle.aop.application.AopOrderApplication;
+import com.sodanights.circle.core.user.service.SelfInvocationService;
 import com.sodanights.circle.core.user.service.UserInfoService;
 import com.sodanights.circle.core.user.service.impl.CircleServiceImpl;
 import com.sodanights.circle.core.user.service.impl.UserInfoServiceImpl;
@@ -22,6 +23,9 @@ public class AopAnnotationTest {
     @Resource
     private CircleServiceImpl circleServiceImpl;
 
+    @Resource
+    private SelfInvocationService selfInvocationService;
+
     @Test
     public void testAnnotaion(){
         userInfoService.aopHello("张三");
@@ -30,5 +34,10 @@ public class AopAnnotationTest {
     @Test
     public void testCglib(){
         circleServiceImpl.hello("李四");
+    }
+
+    @Test
+    public void testSelfAop(){
+        selfInvocationService.helloTwoPerson("张三","李四");
     }
 }
