@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.*;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
+@Service
 @Aspect
 @Order(1)
 public class AnnotationOrderAop {
@@ -28,7 +29,7 @@ public class AnnotationOrderAop {
     public void before(){
         System.out.println("C");
     }
-
+    /**
     @After(value = "target(com.sodanights.circle.core.user.service.UserInfoService)")
     public void after(){
         System.out.println("D");
@@ -37,6 +38,6 @@ public class AnnotationOrderAop {
     @AfterReturning(value = "target(com.sodanights.circle.core.user.service.UserInfoService)")
     public void beforeReturn(){
         System.out.println("E");
-    }
+    }*/
 
 }
