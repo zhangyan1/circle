@@ -23,10 +23,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
         "com.sodanights.circle.core",
         "com.sodanights.circle.dal.user.wrapper"
 })
-@MapperScan(basePackages = {
-        "com.shinemo.ordercenter.dal",
-})
-@EnableTransactionManagement(proxyTargetClass = true)
 public class CoreConfiguration {
 
     @Bean

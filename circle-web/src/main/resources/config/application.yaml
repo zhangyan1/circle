@@ -1,7 +1,7 @@
 # ************************* 自定义配置 *************************
 # *** 应用名称 ***
 application:
-  name: "mq-server"
+  name: "circle"
 # *** 应用编码 ***
   charset: "${application.charset}"
 # *** logback自定义配置 ***
@@ -20,7 +20,7 @@ spring.logback:
 # ************************* 第三方配置 *************************
 spring:
   profiles:
-    active: "${spring.profiles.active}"
+    active: "daily"
   application:
     name: "mq-server"
 # *** http配置 ***
