@@ -9,26 +9,28 @@ import com.sodanights.circle.client.aop.poincut.Pointcut;
 import com.sodanights.circle.client.aop.proxy.ProxyFacatory;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.ConstructorArgumentValues;
+import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class AopCreator implements BeanPostProcessor,ApplicationContextAware,BeanFactoryAware{
+public class AopCreator implements BeanPostProcessor,BeanFactoryAware{
 
     private BeanFactory beanFactory;
 
-    private ApplicationContext applicationContext;
 
     private List<Advisor> advisors = new ArrayList<>();
 
@@ -40,7 +42,6 @@ public class AopCreator implements BeanPostProcessor,ApplicationContextAware,Bea
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException{
-
         if(initAdvisor(bean,beanName)){
             return bean;
         }
@@ -105,22 +106,10 @@ public class AopCreator implements BeanPostProcessor,ApplicationContextAware,Bea
 
         }
     }
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
-    }
+
 
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         this.beanFactory = beanFactory;
     }
-
-    /*@Override
-    public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
-        System.out.println("开始注册advisor拉 size:"+rootBeanDefinitions.size());
-        for(RootBeanDefinition iter:rootBeanDefinitions){
-            registry.registerBeanDefinition(iter.getBeanClassName(),iter);
-        }
-    }*/
-
 }

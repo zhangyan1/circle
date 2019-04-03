@@ -1,8 +1,7 @@
 package com.sodanights.circle.aop.order.test;
-import com.sodanights.circle.aop.application.AopOrderApplication;
 import com.sodanights.circle.aop.application.SodaAopApplication;
 import com.sodanights.circle.core.act.service.ActService;
-import com.sodanights.circle.core.act.service.impl.SodaAspect;
+import com.sodanights.circle.core.aspect.SodaAspect;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

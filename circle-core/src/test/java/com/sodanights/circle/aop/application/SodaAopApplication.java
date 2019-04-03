@@ -6,6 +6,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerA
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class,DataSourceTransactionManagerAutoConfiguration.class})
-@ComponentScan(basePackages = {"com.sodanights.circle.client.aop.creator","com.sodanights.circle.core.act"})
+@ComponentScan(basePackages = {"com.sodanights.circle.client.aop.creator","com.sodanights.circle.core.aspect","com.sodanights.circle.core.act"})
 public class SodaAopApplication {
 }
