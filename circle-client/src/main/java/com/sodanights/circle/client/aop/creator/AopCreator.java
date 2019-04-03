@@ -46,7 +46,9 @@ public class AopCreator implements BeanPostProcessor,ApplicationContextAware {
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException{
 
-        initAdvisor(bean,beanName);
+        if(initAdvisor(bean,beanName)){
+            return bean;
+        }
         if(bean instanceof MethodInterceptor){
             return bean;
         }
