@@ -30,13 +30,12 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class AopCreator implements BeanPostProcessor,ApplicationContextAware {
+public class AopCreator implements BeanPostProcessor,ApplicationContextAware,BeanFactoryAware{
 
     private BeanFactory beanFactory;
 
     private ApplicationContext applicationContext;
 
-    private List<RootBeanDefinition> rootBeanDefinitions = new ArrayList<>();
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -92,7 +91,6 @@ public class AopCreator implements BeanPostProcessor,ApplicationContextAware {
             aroundAdvice.setAspectJAdviceMethod(method);
             RootBeanDefinition advisorDefinition = new RootBeanDefinition(Advisor.class);
             constructor(advisorDefinition, aroundAdvice);
-            rootBeanDefinitions.add(advisorDefinition);
             ConfigurableApplicationContext configurableApplicationContext = (ConfigurableApplicationContext) applicationContext;
             DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) configurableApplicationContext
                     .getBeanFactory();
@@ -117,6 +115,11 @@ public class AopCreator implements BeanPostProcessor,ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
+    }
+
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        this.beanFactory = beanFactory;
     }
 
     /*@Override
