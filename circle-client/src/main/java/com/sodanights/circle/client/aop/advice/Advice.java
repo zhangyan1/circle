@@ -1,4 +1,4 @@
 package com.sodanights.circle.client.aop.advice;
 
-public class Advice {
+public interface Advice {
 }
