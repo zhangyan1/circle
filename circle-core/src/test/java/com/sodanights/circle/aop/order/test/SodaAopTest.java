@@ -16,9 +16,6 @@ public class SodaAopTest {
     @Resource
     private ActService actService;
 
-    @Resource
-    private SodaAspect sodaAspect;
-
     @Test
     public void test(){
         actService.aopHello("张三");
