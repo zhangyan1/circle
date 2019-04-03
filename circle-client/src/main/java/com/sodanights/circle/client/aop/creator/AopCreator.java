@@ -10,11 +10,13 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class AopCreator implements BeanPostProcessor,BeanFactoryAware,ApplicationContextAware {
 
     private BeanFactory beanFactory;
