@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sodanights.circle.dal.user.mapper.UserMapper">
+
+	<!-- 结果集对应关系 -->
+	<resultMap id="result" type="com.sodanights.circle.client.user.domain.UserDomain" >
+		<id column="id" property="id"/>
+		<result property="appType" column="app_type"/>
+		<result property="scopeId" column="scope_id"/>
+		<result property="orgId" column="org_id"/>
+		<result property="content" column="content"/>
+		<result property="status" column="status"/>
+		<result property="createUserId" column="create_user_id"/>
+		<result property="userId" column="user_id"/>
+		<result property="createUserName" column="create_user_name"/>
+		<result property="gmtCreate" column="gmt_create"/>
+		<result property="gmtModified" column="gmt_modified"/>
+	</resultMap>
+
+	<!-- 数据库字段 -->
+	<sql id="columns">
+		id, app_type, scope_id, org_id, content, status, create_user_id, user_id, create_user_name, gmt_create, gmt_modified
+	</sql>
+
+    <sql id="table">
+        user
+    </sql>
+
+    <!-- 查询条件 -->
+    <sql id="conditions">
+        <where>
+            <choose>
+                <when test="id != null">and id = #{id}</when>
+                <otherwise>
+					<if test="appType != null">and app_type = #{appType}</if>
+					<if test="scopeId != null">and scope_id = #{scopeId}</if>
+					<if test="orgId != null">and org_id = #{orgId}</if>
+					<if test="content != null">and content = #{content}</if>
+					<if test="status != null">and status = #{status}</if>
+					<if test="createUserId != null">and create_user_id = #{createUserId}</if>
+					<if test="userId != null">and user_id = #{userId}</if>
+					<if test="createUserName != null">and create_user_name = #{createUserName}</if>
+					<if test="gmtCreate != null">and gmt_create = #{gmtCreate}</if>
+					<if test="gmtModified != null">and gmt_modified = #{gmtModified}</if>
+                </otherwise>
+            </choose>
+        </where>
+    </sql>
+
+
+	<!-- 查询结果集 -->
+    <select id="find" resultMap="result"
+            parameterType="com.sodanights.circle.client.user.query.UserQuery">
+        select
+        <include refid="columns"/>
+        from
+        <include refid="table"/>
+        <include refid="conditions"/>
+        <if test="orderByEnable and orderByList != null and orderByList.size() > 0">
+            order by
+            <foreach collection="orderByList" item="orderBy" separator=",">
+                ${orderBy.column} ${orderBy.sort}
+            </foreach>
+        </if>
+        <if test="pageEnable">
+            limit #{startRow}, #{pageSize}
+        </if>
+    </select>
+
+	<!-- 查询某条记录 -->
+    <select id="get" resultMap="result" parameterType="com.sodanights.circle.client.user.query.UserQuery">
+        select
+        <include refid="columns"/>
+        from
+        <include refid="table"/>
+        <include refid="conditions"/>
+        limit 1
+    </select>
+
+	<!-- 统计查询结果数量 -->
+    <select id="count" resultType="long" parameterType="com.sodanights.circle.client.user.query.UserQuery">
+        select count(*) from
+        <include refid="table"/>
+        <include refid="conditions"/>
+    </select>
+
+	<!-- 删除 -->
+    <delete id="delete" parameterType="com.sodanights.circle.client.user.query.UserQuery">
+        delete from
+        <include refid="table"/>
+        where id = #{id}
+    </delete>
+
+	<!-- 插入 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.sodanights.circle.client.user.domain.UserDomain">
+        insert into
+        <include refid="table"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                    <if test="id != null">
+						id,
+					</if>
+                    <if test="appType != null">
+						app_type,
+					</if>
+                    <if test="scopeId != null">
+						scope_id,
+					</if>
+                    <if test="orgId != null">
+						org_id,
+					</if>
+                    <if test="content != null">
+						content,
+					</if>
+                    <if test="status != null">
+						status,
+					</if>
+                    <if test="createUserId != null">
+						create_user_id,
+					</if>
+                    <if test="userId != null">
+						user_id,
+					</if>
+                    <if test="createUserName != null">
+						create_user_name,
+					</if>
+					gmt_create,
+					gmt_modified,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                    <if test="id != null">
+						#{id, jdbcType=BIGINT},
+                    </if>
+                    <if test="appType != null">
+						#{appType, jdbcType=INTEGER},
+                    </if>
+                    <if test="scopeId != null">
+						#{scopeId, jdbcType=BIGINT},
+                    </if>
+                    <if test="orgId != null">
+						#{orgId, jdbcType=BIGINT},
+                    </if>
+                    <if test="content != null">
+						#{content, jdbcType=VARCHAR},
+                    </if>
+                    <if test="status != null">
+						#{status, jdbcType=INTEGER},
+                    </if>
+                    <if test="createUserId != null">
+						#{createUserId, jdbcType=BIGINT},
+                    </if>
+                    <if test="userId != null">
+						#{userId, jdbcType=BIGINT},
+                    </if>
+                    <if test="createUserName != null">
+						#{createUserName, jdbcType=VARCHAR},
+                    </if>
+                    now(),
+                    now(),
+        </trim>
+    </insert>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="com.sodanights.circle.client.user.domain.UserDomain">
+        UPDATE user
+        <set>
+            <if test="appType != null">
+                app_type = #{appType, jdbcType=INTEGER},
+            </if>
+            <if test="scopeId != null">
+                scope_id = #{scopeId, jdbcType=BIGINT},
+            </if>
+            <if test="orgId != null">
+                org_id = #{orgId, jdbcType=BIGINT},
+            </if>
+            <if test="content != null">
+                content = #{content, jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status, jdbcType=INTEGER},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId, jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId, jdbcType=BIGINT},
+            </if>
+            <if test="createUserName != null">
+                create_user_name = #{createUserName, jdbcType=VARCHAR},
+            </if>
+            gmt_modified = now()
+        </set>
+        WHERE
+        id = #{id}
+    </update>
+</mapper>
