@@ -1,0 +1,69 @@
+# ************************* 自定义配置 *************************
+# *** 应用名称 ***
+application:
+  name: "circle"
+# *** 应用编码 ***
+  charset: "${application.charset}"
+# *** logback自定义配置 ***
+spring.logback: 
+  access.max.history: 3
+  access.max.file.size: "100MB"
+  error.max.history: 7
+  error.max.file.size: "100MB"
+  info.max.history: 3
+  info.max.file.size: "100MB"
+  application.max.history: 3
+  application.max.file.size: "100MB"
+  sql.max.history: 7
+  sql.max.file.size: "100MB"
+
+# ************************* 第三方配置 *************************
+spring:
+  application:
+    name: "circle"
+# *** http配置 ***
+  http:
+    encoding.force: true
+# *** mvc配置 ***
+  mvc:
+    date-format: "yyyy-MM-dd HH:mm:ss"
+# *** ResponseBody jackson配置 ***
+  jackson:
+    date-format: "yyyy-MM-dd HH:mm:ss"
+    time-zone: "GMT+08:00"
+    serialization.write-dates-as-timestamps: false
+    default-property-inclusion: "NON_EMPTY"
+# *** datasource配置 ***
+  datasource:
+    url: "jdbc:mysql://10.0.10.42/buy?autoReconnect=true&amp;failOverReadOnly=false&amp;maxReconnects=10&amp;characterEncoding=UTF8&amp;allowMultiQueries=true"
+    username: "root"
+    password: "shinemo123"
+    driver-class-name: "com.mysql.jdbc.Driver"
+    type: "com.alibaba.druid.pool.DruidDataSource"
+    filters: "stat"
+    max-active: 20
+    initial-size: 1
+    max-wait: 60000
+    min-idle: 1
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    validation-query: "select 1 from dual"
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+    pool-prepared-statements: true
+    max-open-prepared-statements: 20
+# *** web配置 ***
+server:
+  port: 7019
+  context-path: "/circle"
+  display-name: "circle"
+# *** mybatis配置 ***
+mybatis:
+  mapper-locations: "classpath:sqlmap/*.xml"
+  config-location: "classpath:mybatis-config.xml"
+# *** log4jdbc配置 ***
+log4jdbc:
+  dump.sql.addsemicolon: true
+  sqltiming.error.threshold: 1000
+  sqltiming.warn.threshold: 500

@@ -23,8 +23,6 @@ spring:
     url: "jdbc:mysql://10.0.10.42/buy?autoReconnect=true&amp;failOverReadOnly=false&amp;maxReconnects=10&amp;characterEncoding=UTF8&amp;allowMultiQueries=true"
     username: "root"
     password: "shinemo123"
-    type: "com.alibaba.druid.pool.DruidDataSource"
-    driver-class-name: "com.mysql.jdbc.Driver"
   redis:
     #config: "10.0.10.53:6379:shinemo123:6"
 # 日志格式中 clr 占位符生效配置
