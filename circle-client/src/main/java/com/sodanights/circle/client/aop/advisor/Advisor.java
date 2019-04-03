@@ -11,4 +11,8 @@ public class Advisor{
 
     private Advice advice;
     private Pointcut pointcut;
+
+    public Advisor(Advice advice){
+        this.advice = advice;
+    }
 }

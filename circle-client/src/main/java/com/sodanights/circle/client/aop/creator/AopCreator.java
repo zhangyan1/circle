@@ -17,9 +17,11 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.ConstructorArgumentValues;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Method;
@@ -28,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class AopCreator implements BeanPostProcessor,ApplicationContextAware,BeanDefinitionRegistryPostProcessor {
+public class AopCreator implements BeanPostProcessor,ApplicationContextAware {
 
     private BeanFactory beanFactory;
 
@@ -43,7 +45,7 @@ public class AopCreator implements BeanPostProcessor,ApplicationContextAware,Bea
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException{
-        
+
         initAdvisor(bean,beanName);
         if(bean instanceof MethodInterceptor){
             return bean;
@@ -88,8 +90,11 @@ public class AopCreator implements BeanPostProcessor,ApplicationContextAware,Bea
             aroundAdvice.setAspectJAdviceMethod(method);
             RootBeanDefinition advisorDefinition = new RootBeanDefinition(Advisor.class);
             constructor(advisorDefinition, aroundAdvice);
-            advisorDefinition.setBeanClassName(beanName+"advisor");
             rootBeanDefinitions.add(advisorDefinition);
+            ConfigurableApplicationContext configurableApplicationContext = (ConfigurableApplicationContext) applicationContext;
+            DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) configurableApplicationContext
+                    .getBeanFactory();
+            defaultListableBeanFactory.registerBeanDefinition(beanName+"advisor", advisorDefinition);
         }
         return true;
     }
@@ -112,16 +117,12 @@ public class AopCreator implements BeanPostProcessor,ApplicationContextAware,Bea
         this.applicationContext = applicationContext;
     }
 
-    @Override
+    /*@Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
         System.out.println("开始注册advisor拉 size:"+rootBeanDefinitions.size());
         for(RootBeanDefinition iter:rootBeanDefinitions){
             registry.registerBeanDefinition(iter.getBeanClassName(),iter);
         }
-    }
+    }*/
 
-    @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-
-    }
 }

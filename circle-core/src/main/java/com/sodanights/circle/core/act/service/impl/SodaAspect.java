@@ -5,8 +5,10 @@ import com.sodanights.circle.client.aop.annotation.Apt;
 import com.sodanights.circle.client.aop.annotation.Mpt;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.springframework.stereotype.Service;
 
 @Apt
+@Service
 public class SodaAspect implements MethodInterceptor {
 
     @Override
