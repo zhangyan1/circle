@@ -1,4 +1,4 @@
-package com.sodanights.circle.core.user.service.impl;
+package com.sodanights.circle.core.act.service.impl;
 
 import org.springframework.stereotype.Service;
 

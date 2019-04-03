@@ -1,6 +1,6 @@
-package com.sodanights.circle.core.user.service.impl;
+package com.sodanights.circle.core.act.service.impl;
 import org.springframework.stereotype.Service;
-import com.sodanights.circle.core.user.service.ActService;
+import com.sodanights.circle.core.act.service.ActService;
 
 /**
  * Created by zhangyan on 27/03/2018.

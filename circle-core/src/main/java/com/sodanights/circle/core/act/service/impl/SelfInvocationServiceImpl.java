@@ -1,7 +1,6 @@
-package com.sodanights.circle.core.user.service.impl;
+package com.sodanights.circle.core.act.service.impl;
 
-import com.sodanights.circle.core.user.service.SelfInvocationService;
-import org.springframework.aop.framework.AopContext;
+import com.sodanights.circle.core.act.service.SelfInvocationService;
 import org.springframework.stereotype.Service;
 
 

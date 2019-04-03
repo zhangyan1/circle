@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
  * @author zhangyan
  * @Date 2019-04-03 14:55:23
  */
-@Repository
+
 public interface UserMapper extends Mapper<UserDomain,UserQuery> {
 }

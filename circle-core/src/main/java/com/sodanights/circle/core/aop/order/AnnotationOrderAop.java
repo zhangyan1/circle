@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Order(1)
 public class AnnotationOrderAop {
 
-    @Around(value = "execution(* com.sodanights.circle.core.user..*.*(..))")
+    @Around(value = "execution(* com.sodanights.circle.core.act..*.*(..))")
     public Object around(ProceedingJoinPoint joinPoint){
         System.out.println("A");
         try {
@@ -25,7 +25,7 @@ public class AnnotationOrderAop {
         return null;
     }
 
-    @Before(value = "within(com.sodanights.circle.core.user..*)")
+    @Before(value = "within(com.sodanights.circle.core.act..*)")
     public void before(){
         System.out.println("C");
     }
