@@ -5,23 +5,17 @@ import com.sodanights.circle.client.aop.advisor.Advisor;
 import com.sodanights.circle.client.aop.annotation.Apt;
 import com.sodanights.circle.client.aop.annotation.Mpt;
 import com.sodanights.circle.client.aop.filter.AopFilter;
+import com.sodanights.circle.client.aop.poincut.Pointcut;
 import com.sodanights.circle.client.aop.proxy.ProxyFacatory;
 import org.aopalliance.intercept.MethodInterceptor;
-import org.springframework.aop.aspectj.AspectJPointcutAdvisor;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.ConstructorArgumentValues;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Method;
@@ -35,6 +29,8 @@ public class AopCreator implements BeanPostProcessor,ApplicationContextAware,Bea
     private BeanFactory beanFactory;
 
     private ApplicationContext applicationContext;
+
+    private List<Advisor> advisors = new ArrayList<>();
 
 
     @Override
@@ -51,12 +47,11 @@ public class AopCreator implements BeanPostProcessor,ApplicationContextAware,Bea
         if(bean instanceof MethodInterceptor){
             return bean;
         }
-        Map<String,Advisor> advisorMap = applicationContext.getBeansOfType(Advisor.class);
-        if(advisorMap.size() == 0){
+        if(advisors.size() == 0){
             return bean;
         };
         List<MethodInterceptor> methodInterceptors = new ArrayList<>();
-        for(Advisor advisor:advisorMap.values()){
+        for(Advisor advisor:advisors){
             if(!AopFilter.matchClass(advisor.getPointcut(),bean)){
                 continue;
             }
@@ -65,7 +60,6 @@ public class AopCreator implements BeanPostProcessor,ApplicationContextAware,Bea
         if(methodInterceptors.size() == 0){
             return bean;
         }
-
         ProxyFacatory proxyFacatory = new ProxyFacatory();
         proxyFacatory.setTargetClass(bean.getClass());
         proxyFacatory.setTargetInterfaces(bean.getClass().getInterfaces());
@@ -89,12 +83,11 @@ public class AopCreator implements BeanPostProcessor,ApplicationContextAware,Bea
             aroundAdvice.setAspectInstanceName(beanName);
             aroundAdvice.setBeanFactory(beanFactory);
             aroundAdvice.setAspectJAdviceMethod(method);
-            RootBeanDefinition advisorDefinition = new RootBeanDefinition(Advisor.class);
-            constructor(advisorDefinition, aroundAdvice);
-            ConfigurableApplicationContext configurableApplicationContext = (ConfigurableApplicationContext) applicationContext;
-            DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) configurableApplicationContext
-                    .getBeanFactory();
-            defaultListableBeanFactory.registerBeanDefinition(beanName+"advisor", advisorDefinition);
+            Advisor advisor = new Advisor(aroundAdvice);
+            Pointcut pointcut = new Pointcut();
+            pointcut.setTargetClass(mpt.value());
+            advisor.setPointcut(pointcut);
+            advisors.add(advisor);
         }
         return true;
     }

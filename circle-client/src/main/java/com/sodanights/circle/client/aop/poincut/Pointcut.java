@@ -1,5 +1,10 @@
 package com.sodanights.circle.client.aop.poincut;
 
-public class Pointcut{
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+public class Pointcut{
+    private Class<?> targetClass;
 }
