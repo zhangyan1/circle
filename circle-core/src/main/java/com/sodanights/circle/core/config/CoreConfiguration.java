@@ -17,7 +17,8 @@ import com.sodanights.circle.client.common.util.EnvUtil;
  */
 @Configuration
 @ComponentScan(basePackages = {
-        "com.sodanights.circle.core"
+        "com.sodanights.circle.core",
+        "com.sodanights.circle.dal"
 })
 public class CoreConfiguration {
 
