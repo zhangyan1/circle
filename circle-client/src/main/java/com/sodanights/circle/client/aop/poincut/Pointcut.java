@@ -1,5 +1,5 @@
 package com.sodanights.circle.client.aop.poincut;
 
-public interface Pointcut {
+public class Pointcut{
 
 }
