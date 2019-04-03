@@ -51,7 +51,7 @@ public class AopCreator implements BeanPostProcessor,BeanFactoryAware,Applicatio
         proxyFacatory.setTargetInterfaces(bean.getClass().getInterfaces());
         proxyFacatory.setTargetObject(bean);
         proxyFacatory.setMethodInterceptors(methodInterceptors);
-        return null;
+        return proxyFacatory.getProxy();
     }
 
     @Override

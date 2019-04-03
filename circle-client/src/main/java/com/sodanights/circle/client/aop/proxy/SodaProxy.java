@@ -15,7 +15,7 @@ public class SodaProxy implements InvocationHandler{
     }
 
     public Object getProxy(){
-        return Proxy.newProxyInstance(getClass().getClassLoader(), config.getInterfaces(), this);
+        return Proxy.newProxyInstance(getClass().getClassLoader(), config.getTargetInterfaces(), this);
     }
 
     @Override
