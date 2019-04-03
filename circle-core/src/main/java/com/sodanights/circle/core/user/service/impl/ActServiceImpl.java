@@ -1,12 +1,12 @@
 package com.sodanights.circle.core.user.service.impl;
 import org.springframework.stereotype.Service;
-import com.sodanights.circle.core.user.service.UserInfoService;
+import com.sodanights.circle.core.user.service.ActService;
 
 /**
  * Created by zhangyan on 27/03/2018.
  */
-@Service("userInfoService")
-public class UserInfoServiceImpl implements UserInfoService {
+@Service("actService")
+public class ActServiceImpl implements ActService {
 
     @Override
     public void aopHello(String person) {

@@ -3,9 +3,8 @@ package com.sodanights.circle.aop.order.test;
 
 import com.sodanights.circle.aop.application.AopOrderApplication;
 import com.sodanights.circle.core.user.service.SelfInvocationService;
-import com.sodanights.circle.core.user.service.UserInfoService;
+import com.sodanights.circle.core.user.service.ActService;
 import com.sodanights.circle.core.user.service.impl.CircleServiceImpl;
-import com.sodanights.circle.core.user.service.impl.UserInfoServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,7 +17,7 @@ import javax.annotation.Resource;
 public class AopAnnotationTest {
 
     @Resource
-    private UserInfoService userInfoService;
+    private ActService actService;
 
     @Resource
     private CircleServiceImpl circleServiceImpl;
@@ -28,7 +27,7 @@ public class AopAnnotationTest {
 
     @Test
     public void testAnnotaion(){
-        userInfoService.aopHello("张三");
+        actService.aopHello("张三");
     }
 
     @Test

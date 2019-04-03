@@ -8,8 +8,9 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.test.context.TestPropertySource;
 
 
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class,DataSourceTransactionManagerAutoConfiguration.class})
-@ComponentScan(basePackages = {"com.sodanights.circle.core.aop.order","com.sodanights.circle.core.user"})
+@SpringBootApplication
+@ComponentScan(basePackages = {"com.sodanights.circle.core.aop.order","com.sodanights.circle.core.user",
+        "com.sodanights.circle.dal.user"})
 public class AopOrderApplication {
 
 

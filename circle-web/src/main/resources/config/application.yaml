@@ -59,7 +59,7 @@ server:
   display-name: "circle"
 # *** mybatis配置 ***
 mybatis:
-  mapper-locations: "classpath*:sqlmap/*.xml"
+  mapper-locations: "classpath:sqlmap/*.xml"
   config-location: "classpath:mybatis-config.xml"
 # *** log4jdbc配置 ***
 log4jdbc:
