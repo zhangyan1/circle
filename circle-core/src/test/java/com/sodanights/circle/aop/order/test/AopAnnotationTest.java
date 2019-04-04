@@ -4,6 +4,7 @@ package com.sodanights.circle.aop.order.test;
 import com.sodanights.circle.aop.application.AopOrderApplication;
 import com.sodanights.circle.core.act.service.SelfInvocationService;
 import com.sodanights.circle.core.act.service.ActService;
+import com.sodanights.circle.core.act.service.SleepService;
 import com.sodanights.circle.core.act.service.impl.CircleServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +28,13 @@ public class AopAnnotationTest {
 
     @Test
     public void testAnnotaion(){
+        actService.aopHello("张三");
+    }
+
+    @Test
+    public void testIntrodu(){
+        SleepService sleepService = (SleepService) actService;
+        sleepService.sleep();
         actService.aopHello("张三");
     }
 
