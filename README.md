@@ -40,15 +40,15 @@ aop创建代理和方法执行流程图
 
 ### mybaties aop
 ![mybaties uml](image/mybaties.png)
-MapperRegistry:addMappers方法将包名下每个mapper类创建一个MapperProxyFactory,放入map中
-MapperProxyFactory:创建一个mapperProxy代理类
-MapperProxy:实现了InvocationHandler主要调用MapperMethod的execute
-MapperMethod:创建需要三个参数：DAO接口本身，方法类，Configuration对象 内部新建SqlCommand，MethodSignature俩个类
+* MapperRegistry:addMappers方法将包名下每个mapper类创建一个MapperProxyFactory,放入map中
+* MapperProxyFactory:创建一个mapperProxy代理类
+* MapperProxy:实现了InvocationHandler主要调用MapperMethod的execute
+* MapperMethod:创建需要三个参数：DAO接口本身，方法类，Configuration对象 内部新建SqlCommand，MethodSignature俩个类
 
 ### 自己实现aop
 问题:自己实现一套类似于spring或者mybaties的aop 哪些类是必须的?
-1:创建代理类
-2:一个methodInvoce的实现类 当作拦截器
-3:过滤工具类 用来匹配切点
-4:解析xml或者注解的工具类
-5:详见代码
+* 创建代理类
+* 一个methodInvoce的实现类 当作拦截器
+* 过滤工具类 用来匹配切点
+* 解析xml或者注解的工具类
+* 详见代码
