@@ -30,16 +30,16 @@
 4. aop同一个类里调用是否生效?
 
 ###基础概念
-![avatar](image/concept.png)
+![avatar](../image/concept.png)
 
 ###springAop原理
 aop简版uml类图
-![avatar](image/ccc.png)
+![avatar](../image/ccc.png)
 aop创建代理和方法执行流程图
 ![avatar](image/333.png)
 
 ###mybaties aop
-![avatar](image/mybaties.png)
+![avatar](../image/mybaties.png)
 MapperRegistry:addMappers方法将包名下每个mapper类创建一个MapperProxyFactory,放入map中
 MapperProxyFactory:创建一个mapperProxy代理类
 MapperProxy:实现了InvocationHandler主要调用MapperMethod的execute
