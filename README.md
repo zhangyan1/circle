@@ -1,4 +1,5 @@
 #AOP基础及原理介绍
+
 ##问题
 1. 面向切面编程的理解?
 
@@ -22,7 +23,7 @@
     public void AfterReturning(){
         System.out.println("A5");
     }
-```java
+```
 3. jdk代理和cglib代理的区别?
 
 
